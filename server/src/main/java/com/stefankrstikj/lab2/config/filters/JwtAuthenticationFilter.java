@@ -2,15 +2,12 @@ package com.stefankrstikj.lab2.config.filters;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stefankrstikj.lab2.config.JwtAuthConstants;
 import com.stefankrstikj.lab2.exceptions.PasswordsDoNotMatchException;
 import com.stefankrstikj.lab2.exceptions.UserNotFoundException;
 import com.stefankrstikj.lab2.model.User;
 import com.stefankrstikj.lab2.model.dtos.UserDetailsDto;
-import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -60,7 +57,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException {
         User userDetails = (User) authResult.getPrincipal();
         String token = JWT.create()
                 .withSubject(new ObjectMapper().writeValueAsString(UserDetailsDto.of(userDetails)))

@@ -35,6 +35,12 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
+    // default:
+    // to-one -> FetchType.EAGER
+    // to-many -> FetchType.LAZY
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<ShoppingCart> carts;
+
     public User() {
     }
 
@@ -49,16 +55,6 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(role);
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
     }
 
     @Override
@@ -79,9 +75,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled;
-    }
-
-    public Role getRole() {
-        return role;
     }
 }

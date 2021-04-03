@@ -22,19 +22,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepository.findByUsername(s).orElseThrow(()->new UsernameNotFoundException(s));
+        return userRepository.findByUsername(s).orElseThrow(() -> new UsernameNotFoundException(s));
     }
 
 
     @Override
-    public User register(String username, String password, String repeatPassword, String name, String surname, Role userRole) throws Exception {
-        if (username==null || username.isEmpty()  || password==null || password.isEmpty())
+    public User register(String username, String password, String repeatPassword, String name, String surname) throws Exception {
+        if (username == null || username.isEmpty() || password == null || password.isEmpty())
             throw new Exception("Invalid username");
         if (!password.equals(repeatPassword))
             throw new Exception("Incorrect password");
-        if(this.userRepository.findByUsername(username).isPresent())
+        if (this.userRepository.findByUsername(username).isPresent())
             throw new Exception("Username already exists");
-        User user = new User(username,passwordEncoder.encode(password),name,surname,userRole);
+        User user = new User(username, passwordEncoder.encode(password), name, surname, Role.ROLE_USER);
         return userRepository.save(user);
     }
 }
