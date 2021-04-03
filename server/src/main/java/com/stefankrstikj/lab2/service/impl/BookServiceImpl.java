@@ -43,8 +43,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book save(BookDTO bookDTO) {
-        Category cat = categoryRepository.findByNameLike(bookDTO.getCategory()).orElseThrow();
-        Author aut = authorRepository.findByName(bookDTO.getAuthor()).orElseThrow();
+        Category cat = categoryRepository.findById(bookDTO.getCategoryId()).orElseThrow();
+        Author aut = authorRepository.findById(bookDTO.getAuthorId()).orElseThrow();
         return bookRepository.save(new Book(bookDTO.getName(), cat, aut, bookDTO.getAvailableCopies()));
     }
 
@@ -52,8 +52,8 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book update(BookDTO bookDTO) {
         Book oldBook = bookRepository.findById(bookDTO.getId()).orElseThrow();
-        Author author = authorRepository.findByName(bookDTO.getAuthor()).orElseThrow();
-        Category category = categoryRepository.findByNameLike(bookDTO.getCategory()).orElseThrow();
+        Author author = authorRepository.findById(bookDTO.getAuthorId()).orElseThrow();
+        Category category = categoryRepository.findById(bookDTO.getCategoryId()).orElseThrow();
         oldBook.setAuthor(author);
         oldBook.setAvailableCopies(bookDTO.getAvailableCopies());
         oldBook.setCategory(category);
