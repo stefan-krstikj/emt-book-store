@@ -59,6 +59,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public void markAsTaken(Long id) throws Exception {
+        Book book = bookRepository.findById(id).orElseThrow();
+        if(book.getAvailableCopies() <= 0)
+            throw new Exception("Cannot take book " + book.getName() + " with 0 available copies");
+        book.setAvailableCopies(book.getAvailableCopies() - 1);
+        bookRepository.save(book);
+    }
+
+    @Override
     public void deleteById(Long id) {
         bookRepository.deleteById(id);
     }

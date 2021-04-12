@@ -38,6 +38,11 @@ public class BookController {
         return this.bookService.update(bookDTO);
     }
 
+    @PostMapping("/mark-taken/{id}")
+    public void markAsTaken(@PathVariable Long id) throws Exception {
+        bookService.markAsTaken(id);
+    }
+
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id){
         this.bookService.deleteById(id);

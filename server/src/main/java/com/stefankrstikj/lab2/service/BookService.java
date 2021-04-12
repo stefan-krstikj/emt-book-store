@@ -12,5 +12,6 @@ public interface BookService {
     Book findByName(String name);
     Book save(BookDTO bookDTO);
     Book update(BookDTO book);
+    void markAsTaken(Long id) throws Exception;
     void deleteById(Long id);
 }
