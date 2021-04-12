@@ -1,5 +1,6 @@
 package com.stefankrstikj.lab2.model;
 
+import com.stefankrstikj.lab2.model.enumerations.Category;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ public class Book {
 
     private String name;
 
-    @ManyToOne
+    @Enumerated(value = EnumType.STRING)
     private Category category;
 
     @ManyToOne

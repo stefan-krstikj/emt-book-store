@@ -1,7 +1,7 @@
 package com.stefankrstikj.lab2.web.rest;
 
-import com.stefankrstikj.lab2.model.Category;
 import com.stefankrstikj.lab2.model.dtos.CategoryDTO;
+import com.stefankrstikj.lab2.model.enumerations.Category;
 import com.stefankrstikj.lab2.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,10 +20,5 @@ public class CategoryController {
     @GetMapping
     public List<Category> findAll() {
         return this.categoryService.listCategories();
-    }
-
-    @PostMapping("/add")
-    public Category create(@RequestBody CategoryDTO categoryDTO) throws Exception{
-        return this.categoryService.create(categoryDTO.getName(), categoryDTO.getDescription() );
     }
 }
